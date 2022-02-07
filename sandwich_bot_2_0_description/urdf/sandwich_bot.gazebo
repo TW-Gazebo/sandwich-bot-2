@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<robot name="sandwich_bot_sim" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="laser_visual" default="false"/>
+  <xacro:arg name="imu_visual"   default="false"/>
+
+<!-- <gazebo>
+  <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+    <parameters>$(find sandwich_bot_2_0_description)/config/controller_manager.yaml</parameters>
+  </plugin>
+  </gazebo> -->
+  <gazebo>
+    <plugin
+        filename="ignition-gazebo-diff-drive-system"
+        name="ignition::gazebo::systems::DiffDrive">
+        <left_joint>wheel_left_joint</left_joint>
+        <right_joint>wheel_right_joint</right_joint>
+        <wheel_separation>0.160</wheel_separation>
+        <wheel_radius>0.033</wheel_radius>
+        <topic>cmd_vel</topic>
+        <frame_id>odom</frame_id>
+        <child_frame_id>base_footprint</child_frame_id>
+      </plugin>
+      <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <visual>
+      <material>
+        <ambient>.175 .175 .175  1.0</ambient>
+        <diffuse>.175 .175 .175  1.0</diffuse>
+        <!-- <specular>.175 .175 .175 1.000000 1.500000</specular> -->
+      </material>
+    </visual>
+  </gazebo>
+
+  <gazebo reference="camera_link">
+    <visual>
+      <material>
+        <ambient>0 0.7 0.9 </ambient>
+        <diffuse>0 0.7 0.9</diffuse>
+        <!-- <specular>1 1 1 1</specular> -->
+      </material>
+    </visual>
+    </gazebo>
+
+    <gazebo reference="camera_link_left">
+    <visual>
+      <material>
+        <ambient>1 0 0 </ambient>
+        <diffuse>1 0 0</diffuse>
+        <!-- <specular>0.1 0.1 0.1 1 1</specular> -->
+      </material>
+    </visual>
+    <sensor name="camera_left" type="camera">
+      <camera>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>320</width>
+          <height>240</height>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>100</far>
+        </clip>
+      </camera>
+      <always_on>1</always_on>
+      <update_rate>120</update_rate>
+      <visualize>true</visualize>
+      <topic>stereo_camera/left/image_raw</topic>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="camera_link_right">
+    <visual>
+      <material>
+        <ambient>0.5 0.5 0 </ambient>
+        <diffuse>0.5 0.5 0</diffuse>
+        <!-- <specular>0.1 0.1 0.1 1 1</specular> -->
+      </material>
+    </visual>
+    <sensor name="camera_right" type="camera">
+      <camera>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>320</width>
+          <height>240</height>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>100</far>
+        </clip>
+      </camera>
+      <always_on>1</always_on>
+      <update_rate>120</update_rate>
+      <visualize>true</visualize>
+      <topic>stereo_camera/right/image_raw</topic>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="wheel_left_link">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <fdir1>1 0 0</fdir1>
+    <visual>
+      <material>
+        <ambient>0 0 0 1</ambient>
+        <diffuse>0 0 0 1</diffuse>
+        <!-- <specular>0.1 0.1 0.1 1 5.0</specular> -->
+      </material>
+    </visual>
+  </gazebo>
+
+  <gazebo reference="wheel_right_link">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <fdir1>1 0 0</fdir1>
+    <visual>
+      <material>
+        <ambient>0 0 0 1</ambient>
+        <diffuse>0 0 0 1</diffuse>
+        <!-- <specular>0.1 0.1 0.1 1 5.0</specular> -->
+      </material>
+    </visual>
+  </gazebo>
+
+  <gazebo reference="caster_back_link">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="imu_link">
+    <sensor name="imu_sensor" type="imu">
+      <always_on>1</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>imu</topic>
+    </sensor>
+    <!-- <material>Gazebo/FlatBlack</material> -->
+  </gazebo>
+
+  <gazebo reference="base_scan">
+    <visual>
+      <material>
+        <ambient>1 0 0 </ambient>
+        <diffuse>1 0 0</diffuse>
+        <!-- <specular>0.1 0.1 0.1 1 1</specular> -->
+      </material>
+    </visual>
+    <sensor name='gpu_lidar' type='gpu_lidar'>"
+      <pose >0 0 0 0 0 0</pose>
+      <topic>lidar</topic>
+      <update_rate>5.5</update_rate>
+      <ray>
+          <scan>
+              <horizontal>
+                <samples>360</samples>
+                <!-- should resolution be 1 here? -->
+                <resolution>1</resolution>
+                <min_angle>0.0</min_angle>
+                <max_angle>6.28319</max_angle>
+              </horizontal>
+              <vertical>
+                  <samples>1</samples>
+                  <resolution>0.01</resolution>
+                  <min_angle>0</min_angle>
+                  <max_angle>0</max_angle>
+              </vertical>
+          </scan>
+          <range>
+              <min>0.15</min>
+              <max>5.5</max>
+              <resolution>0.017</resolution>
+          </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <always_on>1</always_on>
+      <visualize>true</visualize>
+    </sensor>
+  </gazebo>
+
+</robot>

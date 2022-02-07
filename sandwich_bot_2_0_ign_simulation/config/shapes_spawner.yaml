@@ -1,0 +1,16 @@
+# format for box: [wx, wy, wz, x, y, z, model_name, link_name, colour]
+boxes:
+  - [0.2, 0.2, 0.5, -3, -1, 5, simple_box1, red_box, red]
+  - [0.2, 0.2, 0.5, -6.5, 4, 5, simple_box2, red_box, red]
+  - [0.2, 0.2, 0.5, -6.5, -2, 5, simple_box3, red_box, red]
+  - [0.2, 0.2, 0.5, -2, 2.5, 5, simple_box4, blue_box, blue]
+  - [0.2, 0.2, 0.5, -1, 1, 5, simple_box5, red_box, red]
+  - [0.2, 0.2, 0.5, -3.5, 4, 5, simple_box6, green_box, green]
+
+# format for sphere: [ radius, x, y, z, model_name, link_name, colour]
+spheres:
+#   - [0.3, 5, 0, 5, simple_sphere, red_sphere, red]
+
+# format for cylinder: [radius, height, x, y, z, model_name, link_name, colour]
+cylinders:
+#   - [0.1, 0.5, -5, 0, 5, simple_cylinder, red_cylinder, green]

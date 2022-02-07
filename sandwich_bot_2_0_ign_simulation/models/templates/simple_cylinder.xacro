@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<robot name='simple_cylinder' xmlns:xacro='http://ros.org/wiki/xacro'>
+
+    <xacro:include filename="$(find sandwich_bot_2_0_ign_simulation)/models/templates/simple_shapes.gazebo" />
+    
+    <xacro:arg name='radius' default='0' />
+    <xacro:arg name='height' default='0' />
+    <xacro:arg name='link_name' default='simple_cylinder' />
+
+
+    <link name='$(arg link_name)'>
+        <visual>
+            <origin xyz='0 0 0' rpy='0 0 0' />
+            <geometry>
+                <cylinder radius='$(arg radius)' length='$(arg height)'/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz='0 0 0' rpy='0 0 0' />
+            <geometry>
+                <cylinder radius='$(arg radius)' length='$(arg height)'/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <origin xyz='0 0 0' rpy='0 0 0' />
+            <mass value='2' />
+            <inertia ixx='1' ixy='0.0' ixz='0.0' iyy='1' iyz='0.0' izz='1'/>
+        </inertial>
+    </link>
+
+    
+</robot>

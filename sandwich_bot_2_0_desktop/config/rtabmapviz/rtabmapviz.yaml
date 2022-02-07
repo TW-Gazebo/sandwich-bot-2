@@ -1,0 +1,12 @@
+rtabmapviz:
+  ros__parameters:
+    frame_id: base_footprint
+    subscribe_stereo: true
+    subscribe_odom_info: false
+    subscribe_depth: false
+    subscribe_rgbd: false
+    queue_size: 10
+    # odom_info: odom_info
+    odom: odom
+    mapData: mapData
+    approx_sync:  true

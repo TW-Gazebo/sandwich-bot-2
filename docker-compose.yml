@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  sandwich_bot_2_0_control: 
+    image: "sandwich_bot_2_0_control:0.0.1"
+    network_mode: "host"
+  sandwich_bot_2_0_ign_simulation: 
+    image: "sandwich_bot_2_0_ign_simulation:0.0.1"
+    network_mode: "host"

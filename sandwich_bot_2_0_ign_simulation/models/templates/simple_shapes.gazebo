@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="color" value="$(arg color)" />
+
+    <xacro:if value="${color == 'red'}">
+        <gazebo reference="$(arg link_name)">
+            <visual>
+              <material>
+                <ambient>1 0 0</ambient>
+                <diffuse>1 0 0</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+              </material>
+            </visual>
+        </gazebo>
+    </xacro:if>
+
+    <xacro:if value="${color == 'green'}">
+        <gazebo reference="$(arg link_name)">
+            <visual>
+              <material>
+                <ambient>0 1 0</ambient>
+                <diffuse>0 1 0</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+              </material>
+            </visual>
+        </gazebo>
+    </xacro:if>
+
+    <xacro:if value="${color == 'blue'}">
+        <gazebo reference="$(arg link_name)">
+            <visual>
+              <material>
+                <ambient>0 0 1</ambient>
+                <diffuse>0 0 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+              </material>
+            </visual>
+        </gazebo>
+    </xacro:if>
+</robot>

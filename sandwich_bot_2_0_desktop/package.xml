@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>sandwich_bot_2_0_desktop</name>
+  <version>0.0.0</version>
+  <description>The sandwich_bot_2_0_desktop package</description>
+
+  <maintainer email="rushikesh.halle@thoughtworks.com">Rushikesh Halle</maintainer>
+
+  <license>TODO</license>
+
+    <depend>sandwich_bot_2_0_description</depend>
+    <depend>sandwich_bot_2_0_interfaces</depend>
+    <depend>sandwich_bot_2_0_control</depend>
+    <depend>sandwich_bot_2_0_ign_simulation</depend>
+    <depend>rviz2</depend>
+    <depend>teleop_tools</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
