@@ -1,6 +1,6 @@
 # Introduction
 
-This repository contains ros related code for Sandwich 2.0. Sandwich bot 2.0 is a successor of sandwich bot 1.0. What's new in 2.0?
+This repository contains ros related code for Sandwich-bot-2. Sandwich-bot-2 is a successor of sandwich-bot-1. What's new in 2?
 
 - Hardware features:
   - bigger in size.
