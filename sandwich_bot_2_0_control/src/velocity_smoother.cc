@@ -6,7 +6,7 @@ using std::placeholders::_1;
 using namespace std::chrono_literals;
 
 std::string topic_pub = "/cmd_vel";
-std::string topic_sub = "/sandwich_bot_base_controller/cmd_vel_smoother";
+std::string topic_sub = "/cmd_vel_smoother";
 
 rclcpp::Node::SharedPtr make_node_with_params(const std::vector<double> & a, const std::vector<double> & b)
 {

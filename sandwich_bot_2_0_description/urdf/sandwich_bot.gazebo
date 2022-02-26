@@ -3,12 +3,12 @@
   <xacro:arg name="laser_visual" default="false"/>
   <xacro:arg name="imu_visual"   default="false"/>
 
-<!-- <gazebo>
+<gazebo>
   <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
     <parameters>$(find sandwich_bot_2_0_description)/config/controller_manager.yaml</parameters>
   </plugin>
-  </gazebo> -->
-  <gazebo>
+  </gazebo>
+  <!-- <gazebo>
     <plugin
         filename="ignition-gazebo-diff-drive-system"
         name="ignition::gazebo::systems::DiffDrive">
@@ -21,7 +21,7 @@
         <child_frame_id>base_footprint</child_frame_id>
       </plugin>
       <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
-  </gazebo>
+  </gazebo> -->
 
   <gazebo reference="base_link">
     <visual>

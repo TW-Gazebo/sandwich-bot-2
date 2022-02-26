@@ -1,7 +1,8 @@
 import os
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, ExecuteProcess, RegisterEventHandler, DeclareLaunchArgument
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python import get_package_share_directory
 from launch.conditions import IfCondition
@@ -41,11 +42,21 @@ def generate_launch_description():
                os.path.join(sandwich_bot_control_package_share_dir, 'launch', 'robot_state_publisher.py')
           )
      )
+
+     controllers_include = IncludeLaunchDescription(
+          PythonLaunchDescriptionSource(
+               os.path.join(sandwich_bot_control_package_share_dir, 'launch', 'controllers.py')
+          )
+     )
      
      velocity_smoother = Node(
           package="sandwich_bot_2_0_control",
           executable="velocity_smoother",
           output="both",
+          remappings=[
+               ("/cmd_vel_smoother", "/sandwich_bot_base_controller/cmd_vel_smoother"),
+               ("/cmd_vel", "/sandwich_bot_base_controller/cmd_vel_unstamped"),
+          ]
      )
 
      box_picker = Node(
@@ -83,6 +94,7 @@ def generate_launch_description():
           nav2_include,
           exploration_include,
           robot_state_publisher_include,
+          controllers_include,
           velocity_smoother,
           box_picker,
           find_coloured_box_action_server,

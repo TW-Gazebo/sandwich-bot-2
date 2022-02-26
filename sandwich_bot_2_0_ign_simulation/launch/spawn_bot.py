@@ -64,37 +64,12 @@ def generate_launch_description():
                          parameters=[{'use_sim_time': use_sim_time}],
                          arguments = ["0", "0", "0", "0", "0", "0", "imu_link", "sandwich_bot/base_footprint/imu_sensor"])
      
-     left_wheel_static_transform_publisher = Node(package = "tf2_ros", 
-                         executable = "static_transform_publisher",
-                         parameters=[{'use_sim_time': use_sim_time}],
-                         arguments = ["0", "0.08", "0.023", "0", "0", "1.57", "base_link", "wheel_left_link"])
-
-     right_wheel_static_transform_publisher = Node(package = "tf2_ros", 
-                         executable = "static_transform_publisher",
-                         parameters=[{'use_sim_time': use_sim_time}],
-                         arguments = ["0", "-0.08", "0.023", "0", "0", "1.57", "base_link", "wheel_right_link"])
-     
      ros_ign_lidar_bridge = Node(
           package="ros_ign_bridge",
           executable="parameter_bridge",
           arguments=[
                "/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan",
           ])
-
-     ros_ign_odom_tf_bridge = Node(package = "ros_ign_bridge", 
-                         executable = "parameter_bridge",
-                         arguments = [
-                              "/model/sandwich_bot/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V",
-                         ],
-                         remappings=[
-                              ("/model/sandwich_bot/tf", "/tf"),
-                         ])
-
-     ros_ign_cmd_vel_bridge = Node(package = "ros_ign_bridge", 
-                         executable = "parameter_bridge",
-                         arguments = [
-                              "/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist",
-                         ])
 
      ros_ign_left_camera_bridge = Node(
           package="ros_ign_bridge",
@@ -118,15 +93,6 @@ def generate_launch_description():
                                    "/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU",
                                    ])
      
-     ros_ign_odom_bridge = Node(package="ros_ign_bridge",
-                                   executable="parameter_bridge",
-                                   arguments=[
-                                   "/model/sandwich_bot/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry",
-                                   ],
-                                   remappings=[
-                                        ("/model/sandwich_bot/odometry", "/odom"),
-                                   ])
-
     # why this clock bridge needs to be separated?
     # also why this bridge needs to be biway?
      ros_ign_clock_bridge = Node(
@@ -140,7 +106,6 @@ def generate_launch_description():
           sandwich_bot_spawner,
           
           ros_ign_lidar_bridge,
-          ros_ign_cmd_vel_bridge,
           ros_ign_left_camera_bridge,
           ros_ign_right_camera_bridge,
           ros_ign_clock_bridge,
@@ -150,8 +115,4 @@ def generate_launch_description():
           camera_link_left_to_camera_left_transform_publisher,
           camera_link_right_to_camera_right_transform_publisher,
           imu_link_to_imu_sensor_transform_publisher,
-          left_wheel_static_transform_publisher,
-          right_wheel_static_transform_publisher,
-          ros_ign_odom_tf_bridge,
-          ros_ign_odom_bridge
      ])
