@@ -48,6 +48,12 @@ def generate_launch_description():
                os.path.join(sandwich_bot_control_package_share_dir, 'launch', 'controllers.py')
           )
      )
+
+     action_servers_include = IncludeLaunchDescription(
+          PythonLaunchDescriptionSource(
+               os.path.join(sandwich_bot_control_package_share_dir, 'launch', 'action_servers.py')
+          )
+     )
      
      velocity_smoother = Node(
           package="sandwich_bot_2_0_control",
@@ -66,18 +72,6 @@ def generate_launch_description():
                output='both',
                parameters=[{'bt_xml_filename':os.path.join(get_package_share_directory("sandwich_bot_2_0_control"), 'behaviour_trees', 'pick_coloured_boxes_behaviour_tree.xml')}])
 
-     find_coloured_box_action_server = Node(
-            package='sandwich_bot_2_0_control',
-            executable='find_coloured_box_action_server',
-            name='find_coloured_box_action_server',
-            output='both')
-
-     pick_coloured_box_action_server = Node(
-            package='sandwich_bot_2_0_control',
-            executable='pick_coloured_box_action_server',
-            name='pick_coloured_box_action_server',
-            output='both')
-
      box_pickup_pose_publisher = Node(
             package='sandwich_bot_2_0_control',
             executable='box_pickup_pose_publisher',
@@ -95,10 +89,9 @@ def generate_launch_description():
           exploration_include,
           robot_state_publisher_include,
           controllers_include,
+          action_servers_include,
           velocity_smoother,
           box_picker,
-          find_coloured_box_action_server,
-          pick_coloured_box_action_server,
           box_pickup_pose_publisher,
           lidar_camera_fusion,
           use_sim_time_arg
