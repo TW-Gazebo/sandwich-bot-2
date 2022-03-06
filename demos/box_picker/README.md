@@ -30,7 +30,7 @@ The following diagram shows behaviour tree used for navigation:
   ```zsh
   mkdir -p ~/ros2_ws/src
   cd ~/ros2_ws
-  git clone git@github.com:TW-Gazebo/sandwich_bot_2.0-ros2.git ./src/sandwich_bot_2_0 -b demo
+  git clone git@github.com:TW-Gazebo/sandwich_bot_2.0-ros2.git ./src/sandwich_bot_2 -b main
   source /opt/ros/foxy/setup.zsh
   rosdep install -y -r -q --from-paths src --ignore-src --rosdistro foxy -y
   colcon build --packages-up-to sandwich_bot_2_0_desktop
